@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<metadata>
+	<idinfo>
+		<citation>
+			<citeinfo>
+				<origin>U.S. Geological Survey, Central Energy Resources Team</origin>
+				<pubdate>20010501</pubdate>
+				<title>Elevation Map of Bangladesh (elev8bg)</title>
+				<geoform>Downloadable GIS Data</geoform>
+				<lworkcit>
+					<citeinfo>
+						<origin>Persits, F.M., Wandrey, C.J., Milici, R.C., Manwar A.</origin>
+						<origin>Amy S. Karshbaum</origin>
+						<origin>Roland J. Viger</origin>
+						<pubdate>2001</pubdate>
+						<title>Digital Geologic and Geophysical Data of Bangladesh</title><geoform>Digital Maps</geoform>
+						<serinfo>
+							<sername>U.S. Geological Survey Open-File Report</sername>
+							<issue>OFR-97-470-H</issue>
+						</serinfo>
+						<pubinfo>
+							<pubplace>Denver, Colorado</pubplace>
+							<publish>U.S. Geological Survey, Central Energy Resources Team</publish>
+						</pubinfo>
+						<onlink>http://pubs.usgs.gov/of/1997/ofr-97-470/OF97-470H/</onlink>
+						<othercit>
+Geologic and Geophysical Data of Bangladesh is one of a series of
+CD-ROMs presenting digital geologic maps of the world published by
+the U.S. Geological Survey.
+</othercit>
+					</citeinfo>
+				</lworkcit>
+				<onlink>http://energy.cr.usgs.gov/oilgas/wep</onlink></citeinfo>
+		</citation>
+		<descript>
+			<abstract>
+This coverage includes polygons and polygon labels that show areas with
+certain elevation levels of Bangladesh.
+</abstract>
+			<purpose>
+To show areas with different average elevation levels of Bangladesh. The
+data provide government, geologic community, consultants, and the general
+public with a geographic base for small scale natural resource surveys,
+exploration and analysis.
+</purpose>
+		</descript>
+		<timeperd>
+			<timeinfo>
+				<sngdate>
+					<caldate>2001</caldate>
+				</sngdate>
+			</timeinfo>
+			<current>Date of publication</current>
+		</timeperd>
+		<status>
+			<progress>Complete</progress>
+			<update>Not Planned</update>
+		</status>
+		<spdom>
+			<bounding>
+				<westbc>87.984932</westbc>
+				<eastbc>92.926903</eastbc>
+				<northbc>26.733309</northbc>
+				<southbc>20.552744</southbc>
+			</bounding>
+		</spdom>
+		<keywords>
+			<theme>
+				<themekt>None</themekt>
+				<themekey>geography</themekey>
+				<themekey>elevation</themekey>
+				<themekey>generalized</themekey>
+				<themekey>Digital map</themekey>
+			</theme>
+			<theme>
+				<themekt>ArcIMS Metadata Server Theme Codes Thesaurus</themekt>
+				<themekey>geoscientificInformation</themekey>
+			</theme>
+			<theme>
+				<themekt>USGS Energy Program Themes Thesaurus</themekt>
+				<themekey>Earth Science</themekey>
+				<themekey>U.S. Geological Survey</themekey>
+				<themekey>USGS</themekey>
+				<themekey>Geology</themekey>
+				<themekey>Oil</themekey>
+				<themekey>Natural Gas</themekey>
+				<themekey>Petroleum</themekey>
+				<themekey>Resource Assessment</themekey>
+			</theme>
+			<place>
+				<placekt>None</placekt>
+				<placekey>Bangladesh</placekey>
+				<placekey>South Asia</placekey>
+			</place>
+			<place>
+				<placekt>USGS Energy Program Petroleum Assessment Units</placekt>
+				<placekey>Ganges-Brahmaputra Delta, Province 8047</placekey>
+				<placekey>Permian Coal, Total Petroleum System 804701</placekey>
+				<placekey>Jalangi-Sylhet/Burdwan Composite, Total Petroleum System 804702</placekey>
+				<placekey>Jenam/Bhuban-Bokabil, Total Petroleum System 804703</placekey>
+				<placekey>Tertiary Composite Total Petroleum System</placekey>
+				<placekey>South Asia, Region 8</placekey>
+			</place>
+		</keywords>
+		<accconst>None</accconst>
+		<useconst>
+Portions of this database covering coastline and country boundaries contain
+intellectual property of Environmental Systems Research Institute, Inc.
+(ESRI), and are used with their permission. End users are permitted to use
+these data sets for their own internal use, including derivative work, but
+are prohibited from using and redistributing these data individually or in a
+derivative work to third parties. Please refer to the "ATTACHMENT B" file
+(attach_b.txt) in the permssn directory of this CD-ROM for further
+information on ESRI's license agreement. ESRI is a registered trademark in
+the United States and either a trademark or registered trademark in all
+other countries where it is used, and ArcExplorer, Arc/Info, Arcview and
+Arcworld are trademarks of Environmental Systems Research, Inc.
+</useconst>
+		<ptcontac>
+			<cntinfo>
+				<cntorgp>
+					<cntorg>U.S. Geological Survey, Central Energy Resources Team</cntorg>
+					<cntper>Feliks Persits</cntper>
+				</cntorgp>
+				<cntpos>GIS Contractor</cntpos>
+				<cntaddr>
+					<addrtype>mailing address</addrtype>
+					<address>
+U.S. Geological Survey Energy Resource Team, Box 25046, Denver Federal
+Center, MS 939
+</address>
+					<city>Denver</city>
+					<state>Colorado</state>
+					<postal>80225-0046</postal>
+					<country>USA</country>
+				</cntaddr>
+				<cntvoice>303-236-3612</cntvoice>
+				<cntemail>fpersits@usgs.gov</cntemail>
+			</cntinfo>
+		</ptcontac>
+		<native>UNIX, ArcInfo 8.0.2 Windows 2000, Arcview 3.2</native>
+		<browse><browsen>http:\\certmapper.cr.usgs.gov\data\we\ofr97470h\graphic\elev8bg.jpg</browsen><browset>JPEG</browset></browse>
+	</idinfo>
+	<dataqual>
+		<attracc>
+			<attraccr>
+All the attributes other than standard Arc/Info attributes are of
+character type.
+- Attribute item "elev_m" was abstracted from insert on geologic map
+denoting average elevation level.
+- Standard verification of attribute reliability was performed by
+comparison with original insert.
+- Plots were created of the coverage, colored and labeled by item "elev_m"
+at the same scale, projection and map extent of the source maps for the
+purposes of review and examination. Review was conducted by persons
+uninvolved in the compilation.
+</attraccr>
+		</attracc>
+		<logic>
+Has been made by comparison with original
+insert.
+</logic>
+		<complete>
+This map was compiled from the small scale (1: 5,000,000) insert Md.
+Khurshid Alam, A.K.M.Shahidul Hasan, and Mujibur Rahman Khan (Geological
+Survey of Bangladesh), and John W. Whitney (United States Geological
+Survey), 1990, Geological Map of Bangladesh: Geological Survey of Bangladesh
+Publication,  scale 1:1,000,000.
+1. Original insert was scanned on large format scanner in gray-scale mode
+with resolution 200 dpi.
+2. The scanned image was transformed to Lambert Conformal projection by
+ArcInfo REGISTER and RECTIFY utilities.
+3. Reference data for transformation were Bangladesh state boundaries taken
+from paper map and compared with the same boundaries on master geological
+map. Overall RMS error of transformation was 1500 m (0.3 mm on original
+paper map).
+4. On-screen digitization was performed using a rectified image as a
+backdrop in ArcInfo ARCEDIT.
+5. Elevation values in meters were assigned to "elev_m" item of Feature
+Attribute Table (FAT) of "elev_g" coverage.
+6. ArcInfo coverage was converted into .E00 files, then imported to ArcView
+by IMPORT 71 utility and saved as shape files.
+-----------------
+</complete>
+		<posacc>
+			<horizpa>
+				<horizpar>
+1. Original map is of 500 m. maximum accuracy (0.1 mm on paper map
+insert of 1:5,000,000 scale).
+2. Scanned images are of 200 dot/inch resolution (0.1 mm on paper).
+Therefore fuzzy tolerance in ARC/INFO was set to 750 meters (three
+pixels).
+3. Several steps were taken to vectorize scanned images as follows:
+3.1. Country coverage "cntry95" was used as a reference for ArcInfo
+REGISTER and RECTIFY programs. Overall RMS error was 1500m. The
+vectorized coverage was edited and attributed in Arcedit using the
+gray-scale image of the source map as a background guide.
+3.2. Line attributing of the ARC/INFO coverage was verified and
+corrected by comparing it with the gray-scale image as a background.
+ESRI's ArcWorld 1:3M data set is too small in scale for position
+accuracy estimation since original map was at 1: 1,000,000 scale, but to
+estimate relative positional accuracy such a comparison has been
+performed. Overall relative position error was estimated by randomly
+selecting set of locations on the ESRI World country coverage and
+comparing it with the state boundaries on the final geology coverage
+(b_geo). RMS error is 2.9 km (0.58 mm of the original paper map).
+</horizpar>
+			</horizpa>
+			<vertacc>
+				<vertaccr>Not Applicable</vertaccr>
+			</vertacc>
+		</posacc>
+		<lineage>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>Geological Survey of Bangladesh</origin>
+						<pubdate>1990</pubdate>
+						<title>
+Generalized Physiographic Map of Bangladesh (insert on Geologic Map
+of Bangladesh).
+</title>
+						<edition>N/A</edition>
+						<geoform>map</geoform>
+						<pubinfo>
+							<pubplace>Bhutatta Rhaban, 153 Pioneer Road, Segun Bagicha, Dhaka,1000</pubplace>
+							<publish>Geological Survey of Bangladesh</publish>
+						</pubinfo>
+					</citeinfo>
+				</srccite>
+				<srcscale>5000000</srcscale>
+				<typesrc>paper</typesrc>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>unknown</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>publication date</srccurr>
+				</srctime>
+				<srccitea>Elevation Map of Bangladesh</srccitea>
+				<srccontr>Reference elevation data.</srccontr>
+			</srcinfo>
+			<procstep>
+				<procdesc>
+1. Original insert was scanned on large format scanner in gray-scale
+mode with resolution 200 dpi.
+2. The scanned image was transformed to Lambert Conformal projection by
+ArcInfo REGISTER and RECTIFY utilities.
+</procdesc>
+				<procdate>2010109</procdate>
+			</procstep>
+			<procstep>
+				<procdesc>
+Arcs and labels were digitized on screen in Arcedit with a fuzzy
+tolerance of 1500 meters and a weed tolerance of 500 meters, using the
+gray-scale image as a background guide.
+</procdesc>
+				<procdate>2010110</procdate>
+			</procstep>
+			<procstep>
+				<procdesc>
+Elevation values were assigned to "elev_m" item of Polygon Attribute
+Table (PAT) of "elev_g" coverage.
+</procdesc>
+				<procdate>20010110</procdate>
+			</procstep>
+			<procstep>
+				<procdesc>The master coverage was clean and built as a polygon coverage.</procdesc>
+				<procdate>20010112</procdate>
+			</procstep>
+			<procstep>
+				<procdesc>
+Paper maps were plotted from Arcplot at the same scale and extent as the
+original map sources and distributed with the original map source sheets
+to be examined for the purposes of content review.
+</procdesc>
+				<procdate>20010115</procdate>
+			</procstep>
+			<procstep>
+				<procdesc>
+The master coverage was edited in Arcedit, according to the results of
+the content reviews, adding or deleting arcs and labels as needed, and
+updating the attribution of labels as needed.
+</procdesc>
+				<procdate>20010117</procdate>
+			</procstep>
+			<procstep>
+				<procdesc>The master coverage was cleaned and built as a polygon coverage.</procdesc>
+				<procdate>20010120</procdate>
+			</procstep>
+			<procstep>
+				<procdesc>The master coverage was projected to the current Geographic coordinates.</procdesc>
+				<procdate>20010120</procdate>
+			</procstep>
+			<procstep>
+				<procdesc>
+The projected coverage was built with a fuzzy tolerance of 0.002
+degrees.
+</procdesc>
+				<procdate>20010122</procdate>
+			</procstep>
+			<procstep>
+				<procdesc>
+The projected coverage was clipped to the current extent as a polygon
+coverage.
+</procdesc>
+				<procdate>20010125</procdate>
+			</procstep>
+			<procstep>
+				<procdesc>Coverage was converted to Arcview shapefile in Arcview 3.2.</procdesc>
+				<procdate>
+20010126
+</procdate>
+			</procstep></lineage>
+	</dataqual>
+	<spdoinfo>
+		<direct>Vector</direct>
+		<ptvctinf>
+			<sdtsterm>
+				<sdtstype>GT-polygon composed of chains</sdtstype>
+				<ptvctcnt>
+12332
+</ptvctcnt>
+			</sdtsterm>
+		</ptvctinf>
+	</spdoinfo>
+	<spref>
+		<horizsys>
+			<geograph>
+				<latres>0.002</latres>
+				<longres>0.002</longres>
+				<geogunit>Decimal degrees</geogunit>
+			</geograph>
+			<geodetic>
+				<horizdn Sync="TRUE">D_WGS_1984</horizdn>
+				<ellips Sync="TRUE">WGS_1984</ellips>
+				<semiaxis Sync="TRUE">6378137.000000</semiaxis>
+				<denflat Sync="TRUE">298.257224</denflat>
+			</geodetic>
+		</horizsys>
+	</spref>
+	<eainfo>
+		<detailed>
+			<enttyp>
+				<enttypl>Theme in internet map service - "elev8bg.shp"</enttypl>
+				<enttypd>Elevation Map of Bangladesh</enttypd>
+				<enttypds>Geological Survey of Bangladesh</enttypds>
+			</enttyp>
+			<attr>
+				<attrlabl>elev_m</attrlabl>
+				<attrdef>range of elevations in an area.</attrdef>
+				<attrdefs>Geological Survey of Bangladesh</attrdefs>
+				<attrdomv>
+					<edom>
+						<edomv>0 - 3 3-10 10-30 30-75 75-300</edomv>
+						<edomvd>list of elevation levels</edomvd>
+						<edomvds>
+Geological Survey of
+Bangladesh
+</edomvds>
+					</edom>
+				</attrdomv>
+			</attr>
+		</detailed>
+	</eainfo>
+	<distinfo>
+		<distrib>
+			<cntinfo>
+				<cntorgp>
+					<cntorg>U.S. Geological Survey Earth Science Information Center (ESIC)</cntorg>
+				</cntorgp>
+				<cntpos>N/A</cntpos>
+				<cntaddr>
+					<addrtype>mailing and physical address</addrtype>
+					<address>U.S.Geological Survey Box 25286 Building 810 Denver Federal Center</address>
+					<city>Denver</city>
+					<state>CO</state>
+					<postal>80225-0286</postal>
+					<country>U.S.A.</country>
+				</cntaddr>
+				<cntvoice>303.202.4200</cntvoice>
+				<cntemail>infoservices@usgs.gov</cntemail>
+				<hours>8:00 am - 4:00 pm MST</hours>
+			</cntinfo>
+		</distrib>
+		<resdesc>Downloadable Data</resdesc>
+		<distliab>
+No warranty, expressed or implied, is made by the U.S. Geological Survey
+regarding the correctness of the data, or of the utility of the data in any
+computer system, nor shall the act of distribution constitute any such
+warranty.
+</distliab>
+		<stdorder>
+			<digform>
+				<digtinfo>
+					<formname>Shapefile</formname>
+					<transize>37 KB</transize></digtinfo>
+				<digtopt>
+					<offoptn>
+						<offmedia>CD-ROM</offmedia>
+						<recfmt>ISO 9660</recfmt>
+						<compat>
+ISO 9660 format allows the CDROM to be read by most computer
+operating systems.
+</compat>
+					</offoptn><onlinopt><computer><networka><networkr>http://certmapper.cr.usgs.gov/data/we/ofr97470h/spatial/shape/elev8bg.zip</networkr></networka></computer></onlinopt>
+				</digtopt>
+			</digform>
+			<digform>
+				<digtinfo>
+					<formname>Image Map Service (WorldBangladesh)</formname>
+					<formvern>4.0.1</formvern>
+					<formspec>ArcIMS Image Map Service</formspec>
+					<formcont>A web-based interactive mapping system that accesses an ArcIMS Map Service running on certmapper.cr.usgs.gov</formcont>
+				</digtinfo>
+				<digtopt>
+					<onlinopt>
+						<computer>
+							<networka>
+								<networkr>http://certmapper.cr.usgs.gov/pubs/servlet/MapViewerBroker?Service=WorldBangladesh&amp;OVMap=WorldBangladesh_overview&amp;project=world</networkr>
+								<networkr/></networka>
+						</computer>
+						<accinstr>This URL links to a web-based interactive mapping system that accesses an ArcIMS Image Map Service that runs in Netscape 4.7, Internet Explorer 4.5 and higher.  The mapservice can also be accessed using any custom client that adheres to the protocol specified through ArcXML.</accinstr>
+					</onlinopt>
+				</digtopt>
+			</digform>
+			<fees>None</fees>
+			<ordering>This product can be downloaded individually using any one of the digital form, Network_Resource_Name URLs above. Each of these URLs may provide access to various formats of the same product.  To order CD-ROM contact USGS Earth Science Information Center 1-800-USA-MAPS.
+</ordering>
+		</stdorder>
+	</distinfo>
+	<metainfo>
+		<metd>19990207</metd>
+		<metc>
+			<cntinfo>
+				<cntorgp>
+					<cntorg>U.S. Geological Survey, Central Energy Resource Team</cntorg>
+					<cntper>Feliks Persits</cntper>
+				</cntorgp>
+				<cntpos>GIS Contractor</cntpos>
+				<cntaddr>
+					<addrtype>mailing address</addrtype>
+					<address>U.S. Geological Survey, Box 25046, MS 939, Denver Federal Center</address>
+					<city>Denver</city>
+					<state>Colorado</state>
+					<postal>80225-0046</postal>
+					<country>USA</country>
+				</cntaddr>
+				<cntvoice>303-236-3612</cntvoice>
+				<cntemail>datamgt@usgs.gov</cntemail>
+				<cntinst>For inquiries regarding this document, please include the metadata contact person's name, dataset name, and publication series and number.</cntinst>
+			</cntinfo>
+		</metc>
+		<metstdn>FGDC Content Standards for Digital Geospatial Metadata</metstdn>
+		<metstdv>FGDC-STD-001-1998</metstdv>
+		<metrd>20040618</metrd>
+	</metainfo><Esri><ModDate>20040621</ModDate><ModTime>12042800</ModTime></Esri><mdDateSt Sync="TRUE">20040621</mdDateSt></metadata>
