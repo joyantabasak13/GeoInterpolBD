@@ -4,15 +4,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from mpl_toolkits.axes_grid1 import make_axes_locatable
-from mpl_toolkits.basemap import Basemap
 import rasterio as rio
 from rasterio.plot import show
 import geopandas as gpd
-import georaster
 from rasterio.plot import show_hist
 from shapely.geometry import Polygon, mapping
 from rasterio.mask import mask
-from raster2xyz.raster2xyz import Raster2xyz
 
 # define path to digital terrain model
 admin_shp_path = '/home/joyanta/Documents/MSc/weather data interpolation/GeoInterpolBD/data/bgd_adm_bbs_SHP/bgd_admbnda_adm2_bbs_20201113.shp'
