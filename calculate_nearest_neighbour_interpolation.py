@@ -14,7 +14,7 @@ def get_rmse_error(error_list):
         sq_error += float(x)**2
     mean_sq_error = sq_error / len(error_list)
     root_mean_sum_error = math.sqrt(mean_sq_error)
-    print(f"Mean sq error is {mean_sq_error} and RMSE is {root_mean_sum_error}")
+    # print(f"Mean sq error is {mean_sq_error} and RMSE is {root_mean_sum_error}")
     return root_mean_sum_error
 
 
@@ -43,7 +43,7 @@ weather_station_csv = "/home/joyanta/Documents/HDSS_Documents/Weather Data Inter
 temp_info_file = '/home/joyanta/Documents/HDSS_Documents/Weather Data Interpolation/GeoInterpolBD/Bmd Data/temp_info.csv'
 bd_weather_stations = pd.read_csv(weather_station_csv)
 temp_info_df = pd.read_csv(temp_info_file, sep='\t')
-st_target_location = ['Khulna']
+st_target_location = ['Bhola']
 st_nearest = find_nearest_station(st_target_location, bd_weather_stations)
 
 # start calculating errors
@@ -80,8 +80,8 @@ for i, t in enumerate(st_target_location):
     error_year_t = []
 
 # Whole dataset RMSE result
-# rmse_error = get_rmse_error(error_flat_t)
-
+rmse_error = get_rmse_error(error_flat_t)
+print(f"RMSE error: {rmse_error} for location {st_target_location[0]} interpolated from {st_nearest[0]} ")
 # calculate month wise and day wise error
 indexes = np.array(temp_info_df["Year"].drop_duplicates())
 day_colnames = np.arange(1, 367)
@@ -117,20 +117,21 @@ for i, y in enumerate(error_all_year_t):
 
 normalized_day_error_df = day_error_df.copy(deep=True)
 normalized_month_error_df = month_error_df.copy(deep=True)
-# print(f"largest val in df {normalized_month_error_df.max()} and min {normalized_month_error_df.min()}")
 
-###### Were working here ############
-for i, y in enumerate(normalized_month_error_df):
-    for j, m in enumerate(y):
-        normalized_month_error_df.iloc[i,j] =
+d_spread = d_max - d_min
+m_spread = m_max - m_min
 
-normalized_month_error_df=(normalized_month_error_df-normalized_month_error_df.min())/(normalized_month_error_df.max()-normalized_month_error_df.min())
+print(f"Day: Max {d_max} Min {d_min} and spread {d_spread}")
+print(f"Month: Max {m_max} Min {m_min} and spread {m_spread}")
+
+# ###### Were working here ############
+# for i in range(len(normalized_month_error_df)):
+#     for j in range(len(normalized_month_error_df.iloc[0])):
+#         normalized_month_error_df.iloc[i, j] = (normalized_month_error_df.iloc[i, j] - m_min)/m_spread
+
 # print(normalized_month_error_df.head())
 
-
-# df = pd.DataFrame(data, columns=['A', 'B', 'C'])
-#
-# np_temp = np.array([np.array(xi) for xi in x])
-# ax = sns.heatmap(uniform_data, linewidth=0.5)
-# plt.show()
+ax = sns.heatmap(normalized_month_error_df, linewidth=0.5)
+# ax = sns.heatmap(normalized_day_error_df)
+plt.show()
 
