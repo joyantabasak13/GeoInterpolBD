@@ -40,6 +40,8 @@ bd_weather_stations = bd_weather_stations.sort_values(by=["Longitude"], ascendin
 plt.scatter(x=bd_weather_stations["Longitude"], y=bd_weather_stations["Latitude"], marker="*", s=64, edgecolors="k")
 # for i, txt in enumerate(bd_weather_stations["Location"]):
 #     plt.annotate(txt, (bd_weather_stations["Longitude"][i], bd_weather_stations["Latitude"][i]), fontsize=8, fontweight=3)
-
+ax.set_ylabel('Latitude (Degree North)')
+ax.set_xlabel('Longitude (Degree East)')
+plt.savefig("theissen_polygons")
 
 plt.show()
