@@ -7,6 +7,22 @@ import math
 import sklearn.neighbors as skn
 
 
+def get_distance(lat1, lon1, lat2, lon2):
+    lon1 = math.radians(lon1)
+    lon2 = math.radians(lon2)
+    lat1 = math.radians(lat1)
+    lat2 = math.radians(lat2)
+
+    # Haversine formula
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+    a = math.sin(dlat / 2) ** 2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2) ** 2
+
+    c = 2 * math.asin(math.sqrt(a))
+    r = 6371
+    return c * r
+
+
 def get_rmse_error(error_list):
     sq_error = 0.0
     if len(error_list) == 0:
@@ -32,7 +48,7 @@ def find_nearest_station(st_target, st_all):
             t_lon = float(st_target_entry.iloc[0, 3])
             r_lat = float(st_target_removed.iloc[i, 2])
             r_lon = float(st_target_removed.iloc[i, 3])
-            dist = (t_lat - r_lat)**2 + (t_lon - r_lon)**2
+            dist = get_distance(t_lat, t_lon, r_lat, r_lon)
             if dist < nearest_val:
                 nearest_val = dist
                 nearest = st_target_removed.iloc[i, 1]
@@ -40,40 +56,48 @@ def find_nearest_station(st_target, st_all):
     return st_nearest
 
 
-def get_error_df(st_target_location, st_nearest, temp_info_df):
+def get_IDW_val(row, column, n_weights, nearest_stations_df_list):
+    value = 0
+    for i in range(len(nearest_stations_df_list)):
+        n_val = nearest_stations_df_list[i].iloc[row, column]
+        if pd.isnull(n_val) or n_val == "****":
+            return None
+        value += n_weights[i] * float(Decimal(n_val))
+    return value
+
+
+def get_error_df(target_station, nearest_stations, n_weights, var_info_df):
     # start calculating errors
     error_flat_t = []
     error_all_year_t = []
     error_year_t = []
     error_month_t = []
     # Considering only one target
-    for i, t in enumerate(st_target_location):
-        st_t_df = temp_info_df.loc[temp_info_df['Station'] == t]
-        st_nearest_t = st_nearest[i]
-        st_nearest_t_df = temp_info_df.loc[temp_info_df['Station'] == st_nearest_t]
+    target_station_df = var_info_df.loc[temp_info_df['Station'] == target_station]
+    nearest_stations_df_list = []
+    for i, x in enumerate(nearest_stations):
+        nearest_stations_df_list.append(temp_info_df.loc[temp_info_df['Station'] == nearest_stations[i]])
+    min_row_num = target_station_df.shape[0]
+    for i in range(len(nearest_stations_df_list)):
+        if min_row_num < nearest_stations_df_list[i].shape[0]:
+            min_row_num = nearest_stations_df_list[i].shape[0]
 
-        for r in range(min(st_t_df.shape[0], st_nearest_t_df.shape[0])):
-            if r > 0 and r % 12 == 0:
-                error_all_year_t.append(error_year_t)
-                error_year_t = []
-            for c in range(3, 34):
-                t_val = st_t_df.iloc[r, c]
-                n_val = st_nearest_t_df.iloc[r, c]
-                is_not_null = not (pd.isnull(t_val) or pd.isnull(n_val))
-                is_not_star = True
-                if t_val == "****" or n_val == "****":
-                    is_not_star = False
-                if is_not_star and is_not_null:
-                    error = float(Decimal(t_val) - Decimal(n_val))
-                    # print(f"temp in {st_target_location[i]} is {t_val} and temp in {st_nearest[i]} is {n_val}")
-                    # print(f"temp Error is {error}")
-                    error_month_t.append(error)
-                    error_flat_t.append(error)
-            error_year_t.append(error_month_t)
-            error_month_t = []
-        error_all_year_t.append(error_year_t)
-        error_year_t = []
-
+    for r in range(min_row_num):
+        if r > 0 and r % 12 == 0:
+            error_all_year_t.append(error_year_t)
+            error_year_t = []
+        for c in range(3, 34):
+            t_val = target_station_df.iloc[r, c]
+            if not pd.isnull(t_val):
+                if t_val != "****":
+                    n_val = get_IDW_val(r, c, n_weights, nearest_stations_df_list)
+                    if n_val is not None:
+                        error = float(Decimal(t_val) - Decimal(n_val))
+                        error_month_t.append(error)
+                        error_flat_t.append(error)
+        error_year_t.append(error_month_t)
+        error_month_t = []
+    error_all_year_t.append(error_year_t)
     return error_flat_t, error_all_year_t
 
 
@@ -111,7 +135,7 @@ def get_year_month_error(month_colnames, year_indexes, error_all_year_t ):
 
 def get_target_data(target, weather_stations):
     for i, x in enumerate(weather_stations["Location"]):
-        if target[0] == x:
+        if target == x:
             return weather_stations.iloc[i].values.flatten().tolist()
 
 
@@ -122,7 +146,7 @@ def calculate_dist_from_target(target_data, wst_df):
         t_lon = target_data[3]
         n_lat = wst_df.iloc[j, 2]
         n_lon = wst_df.iloc[j, 3]
-        distance = math.sqrt(((t_lat - n_lat) ** 2) + ((t_lon - n_lon) ** 2))
+        distance = get_distance(t_lat, t_lon, n_lat, n_lon)
         dist_row = [target_data[1], wst_df.iloc[j, 1], distance]
         dist.append(dist_row)
     return dist
@@ -138,12 +162,33 @@ def get_k_neighbours(dist_from_target_to_all, neighbours_num):
 
 
 def get_k_neighbours_from_target(target, weather_stations, neighbour_num):
-    k_neighbours_target = []
-    target_data = [get_target_data(target, weather_stations)]
-    dist_all_st_from_target = calculate_dist_from_target(target_data[0], weather_stations)
+    target_data = get_target_data(target[0], weather_stations)
+    dist_all_st_from_target = calculate_dist_from_target(target_data, weather_stations)
     k_neighbours = get_k_neighbours(dist_all_st_from_target, neighbour_num)
-    k_neighbours_target.append(k_neighbours)
-    return k_neighbours_target[0]
+    return k_neighbours
+
+
+def get_weight_vector(target, neighbour_stations, weather_stations):
+    dist_vec = [0]*len(neighbour_stations)
+    weight_vec = [0]*len(neighbour_stations)
+    target_data = get_target_data(target[0], weather_stations)
+    sum = 0
+    for i, x in enumerate(neighbour_stations):
+        n_data = get_target_data(x, weather_stations)
+        t_lat = target_data[2]
+        t_lon = target_data[3]
+        n_lat = n_data[2]
+        n_lon = n_data[3]
+        distance = get_distance(t_lat, t_lon, n_lat, n_lon)
+        dist_vec[i] = distance
+        sum += distance
+    weight_sum = 0
+    for i in range(len(dist_vec)):
+        weight_vec[i] = sum/dist_vec[i]
+        weight_sum += weight_vec[i]
+    for i in range(len(weight_vec)):
+        weight_vec[i] = weight_vec[i]/weight_sum
+    return weight_vec
 
 
 # Load datasets and set target
@@ -152,7 +197,7 @@ temp_info_file = '/home/joyanta/Documents/HDSS_Documents/Weather Data Interpolat
 bd_weather_stations = pd.read_csv(weather_station_csv)
 temp_info_df = pd.read_csv(temp_info_file, sep='\t')
 
-st_target_location = ['Khulna']
+st_target_location = ['Mymensingh']
 
 neighbors_num = 5
 # Only single station is considered
@@ -160,37 +205,66 @@ neighbors_num = 5
 neighbours = get_k_neighbours_from_target(st_target_location, bd_weather_stations, neighbors_num)
 
 target_temp_df = temp_info_df.loc[temp_info_df['Station'] == st_target_location[0]]
-neighbours_temp_df = temp_info_df.loc[temp_info_df['Station'].isin(neighbours)]
 
-print(target_temp_df.head(5))
-print(neighbours_temp_df["Station"])
+neighbour_weights = get_weight_vector(st_target_location, neighbours, bd_weather_stations)
 
-# # Initialize KNN regressor
-# knn_regressor = skn.KNeighborsRegressor(n_neighbors=neighbors, weights="distance")
-#
-# Fit to data
-# knn_regressor.fit(coords_rain_train, value_rain_train)
-# neigh_dist, neigh_index = knn_regressor.kneighbors(X=bd_weather_stations.iloc[: , 2:], n_neighbors=neighbors, return_distance=True)
-# print(neigh_dist)
-# print(neigh_index)
-# st_nearest = find_nearest_station(st_target_location, bd_weather_stations)
-#
-# #get error df
-# error_flat_t, error_all_year_t = get_error_df(st_target_location, st_nearest, temp_info_df)
-#
-# # Whole dataset RMSE result
-# rmse_error = get_rmse_error(error_flat_t)
-# print(f"RMSE error: {rmse_error} for location {st_target_location[0]} interpolated from {st_nearest[0]}")
-#
-# # calculate month wise and day wise error
-# indexes = np.array(temp_info_df["Year"].drop_duplicates())
-# day_colnames = np.arange(1, 367)
-# month_colnames = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
-#
-# month_error_df, m_max, m_min = get_year_month_error(month_colnames, indexes, error_all_year_t)
-# day_error_df, d_max, d_min = get_year_day_error(day_colnames, indexes, error_all_year_t)
+error_flat_t, error_all_year_t = get_error_df(st_target_location[0], neighbours, neighbour_weights, temp_info_df)
 
-# ax = sns.heatmap(month_error_df, linewidth=0.5)
-# # ax = sns.heatmap(normalized_day_error_df)
-# plt.show()
+# Whole dataset RMSE result
+rmse_error = get_rmse_error(error_flat_t)
+print(f"RMSE error: {rmse_error} for location {st_target_location[0]} interpolated from {neighbours} ")
 
+# calculate month wise and day wise error
+indexes = np.array(temp_info_df["Year"].drop_duplicates())
+day_colnames = np.arange(1, 367)
+month_colnames = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+
+day_error_df = pd.DataFrame(np.nan, index=indexes, columns=day_colnames)
+month_error_df = pd.DataFrame(np.nan, index=indexes, columns=month_colnames)
+
+d_max = -999999
+d_min = 9999999
+m_max = -999999
+m_min = 9999999
+
+for i, y in enumerate(error_all_year_t):
+    day_c = 0
+    for j, m in enumerate(y):
+        month_error_df.iloc[i, j] = get_rmse_error(m)
+        if month_error_df.iloc[i, j] > m_max:
+            m_max = month_error_df.iloc[i, j]
+        if month_error_df.iloc[i, j] < m_min:
+            m_min = month_error_df.iloc[i, j]
+
+        for d in m:
+            day_error_df.iloc[i, day_c] = d
+            day_c += 1
+            if d > d_max:
+                d_max = d
+            if d < d_min:
+                d_min = d
+
+# print(f"Monthly max {m_max} and min {m_min}")
+# print(f"Daily max {d_max} or {max(error_flat_t)} and min {d_min} or {min(error_flat_t)}")
+
+normalized_day_error_df = day_error_df.copy(deep=True)
+normalized_month_error_df = month_error_df.copy(deep=True)
+
+d_spread = d_max - d_min
+m_spread = m_max - m_min
+
+print(f"Day: Max {d_max} Min {d_min} and spread {d_spread}")
+print(f"Month: Max {m_max} Min {m_min} and spread {m_spread}")
+
+# ###### Were working here ############
+# for i in range(len(normalized_month_error_df)):
+#     for j in range(len(normalized_month_error_df.iloc[0])):
+#         normalized_month_error_df.iloc[i, j] = (normalized_month_error_df.iloc[i, j] - m_min)/m_spread
+
+# print(normalized_month_error_df.head())
+ax = sns.heatmap(normalized_day_error_df, cmap="PiYG", center=0)
+# ax = sns.heatmap(normalized_day_error_df, linewidth=0.5)
+ax.set_title(f'Nearest Neighbour Daily Temperature Estimation Error \n Target: {st_target_location[0]} Neighbours: {neighbours}', fontdict={'fontsize': '20', 'fontweight' : '3'})
+plt.savefig("daily_error_Bhola_Barishal")
+
+plt.show()

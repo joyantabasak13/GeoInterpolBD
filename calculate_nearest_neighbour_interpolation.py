@@ -43,7 +43,7 @@ weather_station_csv = "/home/joyanta/Documents/HDSS_Documents/Weather Data Inter
 temp_info_file = '/home/joyanta/Documents/HDSS_Documents/Weather Data Interpolation/GeoInterpolBD/Bmd Data/temp_info.csv'
 bd_weather_stations = pd.read_csv(weather_station_csv)
 temp_info_df = pd.read_csv(temp_info_file, sep='\t')
-st_target_location = ['Bhola']
+st_target_location = ['Mymensingh']
 st_nearest = find_nearest_station(st_target_location, bd_weather_stations)
 
 # start calculating errors
@@ -132,8 +132,8 @@ print(f"Month: Max {m_max} Min {m_min} and spread {m_spread}")
 # print(normalized_month_error_df.head())
 ax = sns.heatmap(normalized_day_error_df, cmap="PiYG", center=0)
 # ax = sns.heatmap(normalized_day_error_df, linewidth=0.5)
-ax.set_title('Nearest Neighbour Daily Temperature Estimation Error \n Target: Bhola NN: Barisal', fontdict={'fontsize': '20', 'fontweight' : '3'})
-plt.savefig("daily_error_Bhola_Barishal")
+ax.set_title(f'Nearest Neighbour Daily Temperature Estimation Error \n Target: {st_target_location} Neighbours: {st_nearest}', fontdict={'fontsize': '20', 'fontweight' : '3'})
+# plt.savefig("daily_error_Bhola_Barishal")
 
 plt.show()
 
